@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://bpmInvoiceBrowse.caption"
+        focusComponent="invoicesTable">
+    <data readOnly="true">
+        <collection id="invoicesDc"
+                    class="com.company.train.entity.Invoice">
+            <fetchPlan extends="_base">
+                <property name="fields" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="invoicesDl">
+                <query>
+                    <![CDATA[select e from train_Invoice e where e.fields.status = 10]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="invoicesTable" spacing="true">
+        <filter id="filter"
+                dataLoader="invoicesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="invoicesTable"
+                    width="100%"
+                    dataContainer="invoicesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <group>
+                    <column id="stage.contract.number" caption="msg://contract"/>
+                </group>
+                <column id="fields.number"/>
+                <column id="fields.date"/>
+                <column id="fields.amount"/>
+                <column id="fields.vat"/>
+                <column id="fields.totalAmount"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="invoicesTable.create" caption="msg://com.company.train.screen.contract/create"/>
+                <button id="editBtn" action="invoicesTable.edit" caption="msg://edit"/>
+                <button id="removeBtn" action="invoicesTable.remove" caption="msg://remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

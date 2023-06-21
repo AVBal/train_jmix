@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="train">
+        <createTable tableName="TRAIN_CONTRACT_FILE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TRAIN_CONTRACT_FILE"/>
+            </column>
+            <column name="FILE_" type="VARCHAR(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONTRACT_ID" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="train">
+        <createIndex indexName="IDX_TRAIN_CONTRACT_FILE_CONTRACT" tableName="TRAIN_CONTRACT_FILE">
+            <column name="CONTRACT_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CONTRACT_ID" baseTableName="TRAIN_CONTRACT_FILE"
+                                 constraintName="FK_TRAIN_CONTRACT_FILE_ON_CONTRACT" onDelete="CASCADE"
+                                 referencedColumnNames="ID" referencedTableName="TRAIN_CONTRACT"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,20 @@
+<fetchPlans xmlns="http://jmix.io/schema/core/fetch-plans">
+    <fetchPlan entity="train_ServiceCompletionCertificate" name="serviceCompletionCertificate-fetch-plan"
+               extends="_base">
+        <property name="fields" fetchPlan="_base"/>
+        <property name="stage" fetchPlan="_base">
+            <property name="contract" fetchPlan="_base">
+                <property name="customer" fetchPlan="_base"/>
+                <property name="performer" fetchPlan="_base"/>
+            </property>
+        </property>
+    </fetchPlan>
+    <fetchPlan entity="train_Invoice" name="invoice-fetch-plan" extends="_base">
+        <property name="stage" fetchPlan="_base">
+            <property name="contract" fetchPlan="_base">
+                <property name="customer" fetchPlan="_base"/>
+                <property name="performer" fetchPlan="_base"/>
+            </property>
+        </property>
+    </fetchPlan>
+</fetchPlans>

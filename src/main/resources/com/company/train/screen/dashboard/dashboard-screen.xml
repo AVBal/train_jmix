@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:search="http://jmix.io/schema/search/ui"
+        xmlns:chart="http://jmix.io/schema/ui/charts"
+        caption="msg://dashboardScreen.caption">
+    <layout spacing="true" expand="chartBox">
+        <hbox id="searchBox" spacing="true">
+            <label id="searchLabel" value="msg://search" align="MIDDLE_CENTER"/>
+            <search:searchField id="searchField"/>
+        </hbox>
+        <vbox id="chartBox" spacing="true" width="50%">
+            <chart:pieChart id="customerPieChart"
+                            angle="30"
+                            depth3D="15"
+                            height="100%"
+                            outlineAlpha="0.4"
+                            caption="msg://customerChart"
+                            titleField="organizationName"
+                            valueField="totalAmount"
+                            width="100%">
+                <chart:legend autoMargins="false"
+                              marginRight="80"
+                              markerType="CIRCLE"
+                              position="RIGHT"/>
+                <chart:export/>
+            </chart:pieChart>
+            <chart:pieChart id="performerPieChart"
+                            angle="30"
+                            depth3D="15"
+                            height="100%"
+                            outlineAlpha="0.4"
+                            caption="msg://performerChart"
+                            titleField="organizationName"
+                            valueField="totalAmount"
+                            width="100%">
+                <chart:legend autoMargins="false"
+                              marginRight="80"
+                              markerType="CIRCLE"
+                              position="RIGHT"/>
+                <chart:export/>
+            </chart:pieChart>
+        </vbox>
+    </layout>
+</window>

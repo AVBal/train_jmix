@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/ui/menu">
+
+    <menu id="application" caption="msg://com.company.train/menu.application" insertBefore="administration">
+        <item screen="train_User.browse" caption="msg://com.company.train.screen.user/UserBrowse.caption"/>
+        <item screen="themeSettingsScreen" caption="msg://com.company.train/themesSettings"/>
+        <item screen="train_Organization.browse"
+              caption="msg://com.company.train.screen.organization/organizationBrowse.menu"/>
+        <item screen="train_Contract.browse" caption="msg://com.company.train.screen.contract/contractBrowse.menu"/>
+        <item screen="train_Invoice.browse" caption="msg://com.company.train.screen.invoice/invoiceBrowse.menu"/>
+        <item screen="train_ServiceCompletionCertificate.browse"
+              caption="msg://com.company.train.screen.servicecompletioncertificate/serviceCompletionCertificateBrowse.menu"/>
+    </menu>
+
+</menu-config>

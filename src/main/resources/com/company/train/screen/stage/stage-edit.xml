@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://stageEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="stageDc"
+                  class="com.company.train.entity.Stage">
+            <fetchPlan extends="_base"/>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="stageDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+                <dateField id="dateFromField" property="dateFrom" width="150px"/>
+                <dateField id="dateToField" property="dateTo" width="150px"/>
+                <currencyField id="amountField" property="amount" currency="RUB" width="200px"/>
+                <currencyField id="vatField" property="vat" currency="RUB" datatype="double"
+                               width="200px" editable="false"/>
+                <currencyField id="totalAmountField" property="totalAmount" currency="RUB" editable="false" width="200px"/>
+                <textArea id="descriptionField" property="description"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

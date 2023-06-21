@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://contractEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="contractDc"
+                  class="com.company.train.entity.Contract">
+            <fetchPlan extends="_base">
+                <property name="customer" fetchPlan="_base"/>
+                <property name="performer" fetchPlan="_base"/>
+                <property name="stages" fetchPlan="_base"/>
+                <property name="files" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="stageDc" property="stages"/>
+            <collection id="filesDc" property="files"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="1000"
+                width="1500"/>
+    <layout spacing="true" expand="editActions">
+        <scrollBox id="scrollBox" spacing="true">
+            <hbox spacing="true" width="70%">
+                <form id="form" dataContainer="contractDc">
+                    <column width="350px">
+                        <label id="statusLabel" property="status" css="font-size: 2rem" rowspan="10"/>
+                        <entityPicker id="customerField" property="customer">
+                            <actions>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityClear" type="entity_clear"/>
+                            </actions>
+                        </entityPicker>
+                        <entityPicker id="performerField" property="performer">
+                            <actions>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityClear" type="entity_clear"/>
+                            </actions>
+                        </entityPicker>
+                        <textField id="numberField" property="number"/>
+                        <dateField id="signedDateField" property="signedDate" width="150px"/>
+                        <comboBox id="typeField" property="type"/>
+                        <dateField id="dateFromField" property="dateFrom" width="150px"/>
+                        <dateField id="dateToField" property="dateTo" width="150px"/>
+                        <currencyField id="amountField" property="amount" currency="RUB" datatype="double"
+                                       width="200px"/>
+                        <currencyField id="vatField" property="vat" currency="RUB" datatype="double"
+                                       width="200px" editable="false"/>
+                        <currencyField id="totalAmountField" property="totalAmount" editable="false"
+                                       currency="RUB" datatype="double" width="200px"/>
+                        <textField id="customerSignerField" property="customerSigner"/>
+                        <textField id="performerSignerField" property="performerSigner"/>
+                    </column>
+                </form>
+                <fragment id="contractFilesFragment" screen="train_ContractFileFragment"
+                          height="400px" align="MIDDLE_CENTER"/>
+            </hbox>
+            <groupBox id="stageBox" caption="msg://stages">
+                <table id="stageTable" dataContainer="stageDc" width="100%" height="100%">
+                    <actions>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="invoice"/>
+                        <column id="serviceCompletionCertificate"/>
+                        <column id="name"/>
+                        <column id="dateFrom" sort="ASCENDING"/>
+                        <column id="dateTo"/>
+                        <column id="totalAmount"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button id="createButton" caption="msg://add" icon="ADD_ACTION"/>
+                        <button action="stageTable.edit" caption="msg://edit"/>
+                        <button action="stageTable.remove" caption="msg://remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose" caption="msg://ok"/>
+            <button id="completeTaskButton" caption="msg://completeTaskButton" visible="false"/>
+            <button id="rejectButton" caption="msg://reject" visible="false"/>
+            <button id="closeBtn" action="windowClose" caption="msg://cancel"/>
+        </hbox>
+    </layout>
+</window>
